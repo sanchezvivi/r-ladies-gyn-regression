@@ -31,6 +31,7 @@ vignettes/*.pdf
 *_cache/
 /cache/
 img/
+rsconnect/
 
 # Temporary files created by R markdown
 *.utf8.md
