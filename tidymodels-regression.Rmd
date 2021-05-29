@@ -1,5 +1,5 @@
 ---
-title: "Tidymodels - Estruturando o processo de Machine Learning"
+title: "Regressão com Tidymodels"
 author: "Viviane Sanchez"
 date: "05/29/2021"
 output:
@@ -56,7 +56,8 @@ theme_set(theme_minimal())
 theme_update(text = element_text(family = "Avenir Next", 
                                  size = 12,
                                  color = "#5F504C"),
-             plot.title = element_text(face = "bold", 
+             plot.title = element_text(face = "bold", Simba12/08
+                                       
                                        size = 16,
                                        color = "#B38C45"
                                        ),
