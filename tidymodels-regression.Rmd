@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{html}
+```{=html}
 <style type="text/css">
 
 body, td {
