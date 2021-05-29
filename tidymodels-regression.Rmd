@@ -1,7 +1,7 @@
 ---
 title: "Tidymodels - Estruturando o processo de Machine Learning"
 author: "Viviane Sanchez"
-date: "05/08/2021"
+date: "05/29/2021"
 output:
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -9,6 +9,8 @@ output:
     theme: lumen
 runtime: shiny
 ---
+
+```{=html}
 <style type="text/css">
 
 body, td {
@@ -21,6 +23,7 @@ pre {
   font-size: 18px
 }
 </style>
+```
 
 ```{r setup, include=FALSE, warning=FALSE}
 
@@ -40,7 +43,6 @@ library(ggthemes)
 library(beyonce)
 
 library(glmnet)
-library(kknn)
 library(vip)
 
 knitr::opts_chunk$set(echo = FALSE, size = "huge")
@@ -97,11 +99,9 @@ color_cols <- c("gender","alive","immigrant")
 
 ```
 
-Intro
-==============================
+# Intro
 
-Row {.tabset}
-----------------------------------
+## Row {.tabset}
 
 ### Capa
 
@@ -111,9 +111,7 @@ include_graphics("img/extra_slides_gyn/Slide10.png")
 
 ```
 
-
 ### Agenda
-
 
 ```{r}
 
@@ -129,12 +127,9 @@ include_graphics("img/extra_slides_gyn/Slide3.png")
 
 ```
 
+# Dados
 
-Dados
-================================
-
-Row {.tabset}
-----------------------------------
+## Row {.tabset}
 
 ### Base
 
@@ -143,7 +138,6 @@ Row {.tabset}
 gt_output(outputId = "table")
 
 ```
-
 
 ```{r warning=FALSE, context="server"}
 
@@ -193,12 +187,9 @@ nobel %>%
 
 ```
 
+# EDA
 
-EDA
-================================
-
-Parâmetros {.sidebar}
---------------------------------------------------
+## Parâmetros {.sidebar}
 
 ```{r}
 
@@ -226,9 +217,7 @@ column(6, align="center", offset = 3,
 
 ```
 
-
-Row {.tabset}
-----------------------------------
+## Row {.tabset}
 
 ### Estrutura
 
@@ -348,12 +337,9 @@ isolate({
 
 ```
 
+# Processamento
 
-Processamento
-================================
-
-Row {.tabset}
-----------------------------------
+## Row {.tabset}
 
 ### Estrutura
 
@@ -362,7 +348,6 @@ Row {.tabset}
 include_graphics("img/extra_slides_gyn/Slide5.png")
 
 ```
-
 
 ### Treino x Teste
 
@@ -378,7 +363,7 @@ nobel_test <- testing(nobel_split)
 
 ### Pipeline de processamento
 
-- **Feature Engineering**
+-   **Feature Engineering**
 
 ```{r echo=TRUE}
 
@@ -392,7 +377,7 @@ nobel_test <- testing(nobel_split)
 
 ```
 
-- **Passos adicionais**
+-   **Passos adicionais**
 
 ```{r echo=TRUE}
 
@@ -406,7 +391,7 @@ interact_rec <- norm_rec %>%
 
 ### Extração das bases
 
-- **Treino**
+-   **Treino**
 
 ```{r echo=TRUE}
 
@@ -414,7 +399,7 @@ train_baked <- juice(prep(nobel_rec))
   
 ```
 
-- **Teste**
+-   **Teste**
 
 ```{r echo=TRUE}
 
@@ -422,7 +407,7 @@ test_baked <- bake(prep(nobel_rec), new_data = nobel_test)
 
 ```
 
-- **Preview**
+-   **Preview**
 
 ```{r}
 
@@ -430,10 +415,9 @@ train_baked %>% glimpse
 
 ```
 
-
 ### Reamostragem
 
-- **Bootstrap**
+-   **Bootstrap**
 
 ```{r echo=TRUE}
 
@@ -442,7 +426,7 @@ set.seed(123)
 
 ```
 
-- **Cross Validation**
+-   **Cross Validation**
 
 ```{r echo=TRUE}
 
@@ -451,18 +435,15 @@ set.seed(123)
 
 ```
 
-- **Leave one Out**
-- **Monte Carlo Cross Validation**
-- **Out of Time**
+-   **Leave one Out**
+-   **Monte Carlo Cross Validation**
+-   **Out of Time**
 
-[Referência Rsample](https://rsample.tidymodels.org/reference/index.html) 
+[Referência Rsample](https://rsample.tidymodels.org/reference/index.html)
 
+# Modelagem
 
-Modelagem
-============================================
-
-Row {.tabset}
-----------------------------------
+## Row {.tabset}
 
 ### Estrutura
 
@@ -475,7 +456,7 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ### Regressão
 
-- **Regressão Linear**
+-   **Regressão Linear**
 
 ```{r echo=TRUE}
 
@@ -484,30 +465,32 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ```
 
+-   **Simples** (y \~ x)
 
-  - **Simples**  (y ~ x)
-  
-  $$
+$$
   Y \sim X\beta_0 + \epsilon
   $$
-  
-  - **Múltipla** (y ~ .)
-  $$
-  Y \sim X\beta_0 + X\beta_1 + ... + X\beta_n + \epsilon
-  $$
 
-- **Splines**
-- **KNN**
-- **Redes Neurais**
+-   **Múltipla** (y \~ .) $$
+      Y \sim X_0\beta_0 + X_1\beta_1 + ... + X_n\beta_n + \epsilon
+      $$
 
-- **Principais métricas de performance**:
-  - $R^2$
-  - MSE (Erro Quadrado Médio)
-  - MAE (Erro Médio Absoltuo)
+-   **Splines**
+
+-   **KNN (K Nearest Neighbours)**
+
+-   **Redes Neurais**
+
+-   **Principais métricas de performance**:
+
+    -   $R^2$
+    -   MSE (Erro Quadrado Médio)
+    -   MAE (Erro Médio Absoltuo)
 
 ### Classificação
 
-- **Regressão Logística**
+
+-   **Regressão Logística (Logit)**
 
 ```{r echo=TRUE}
 
@@ -516,7 +499,34 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ```
 
-- **Ridge Regression (Regularização L2)**
+$$ p(X) \sim \frac{e^{\beta_0 + \beta_1X}}{1+e^{\beta_0 + \beta_1X}}$$ 
+
+$$ 0 < p(X) < 1$$
+
+-   **Principais métricas de performance**:
+
+    -   Matriz de confusão
+
+        -   Acurácia/Precisão
+        -   Sensibilidade (Verdadeiro Positivo, Recall)
+        -   Especificidade (Verdadeiro Negativo)
+        -   Erro Total
+
+    -   F-Score\
+
+    -   Área sob a Curva ROC (AUC)
+
+### Matriz de confusão
+
+```{r}
+
+include_graphics("img/extra_slides_gyn/Slide11.png")
+
+```
+
+### Regularização
+
+-   **Ridge Regression (Regularização L2)**
 
 ```{r echo=TRUE}
 
@@ -527,8 +537,9 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ```
 
-- **LASSO (Regularização L1)**
-  - Seleção de variáveis
+-   **LASSO (Regularização L1)**
+
+    -   Seleção de variáveis
 
 ```{r echo=TRUE}
 
@@ -541,7 +552,7 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ### Workflow
 
-- Regressão
+-   Regressão
 
 ```{r echo=TRUE}
 
@@ -551,7 +562,7 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ```
 
-- Classificação
+-   Classificação
 
 ```{r echo=TRUE}
 
@@ -560,7 +571,6 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
   add_model(glm_spec))
 
 ```
-
 
 ### Workflow set
 
@@ -575,7 +585,6 @@ models_wfs <- workflow_set(preproc = list(simple = nobel_rec,
                            cross = TRUE)
 
 ```
-
 
 ```{r echo=TRUE, results='hide'}
 
@@ -600,11 +609,9 @@ nobel_models %>%
 
 ```
 
-Resultados
-============================================
+# Resultados
 
-Row {.tabset}
---------------------------
+## Row {.tabset}
 
 ### Estrutura
 
@@ -613,7 +620,6 @@ Row {.tabset}
 include_graphics("img/extra_slides_gyn/Slide7.png")
 
 ```
-
 
 ### Comparação
 
@@ -686,7 +692,6 @@ lasso_fit <- lasso$fit$fit
 
 ```
 
-
 ### Importância das variáveis
 
 ```{r include=FALSE}
@@ -733,7 +738,7 @@ var_imp %>%
 
 ### Curva ROC
 
-```{r echo=FALSE, fig.width=10, warning=FALSE}
+```{r}
 
 results_test <- glm %>% 
   predict(new_data = nobel_test, type = 'prob') %>% 
@@ -748,6 +753,10 @@ results_test <- glm %>%
   mutate(truth = nobel_test$gender,
          model = 'lasso')) %>% 
   mutate(base = "test")
+
+```
+
+```{r echo=FALSE, fig.width=10, warning=FALSE}
 
 auc_tb <- results_test %>%
    group_by(model) %>%
@@ -767,12 +776,9 @@ auc_tb <- results_test %>%
 
 ```
 
+# Tidymodels
 
-Tidymodels
-============================================
-
-Row {.tabset}
---------------------------
+## Row {.tabset}
 
 ### Estrutura
 
@@ -783,7 +789,6 @@ include_graphics("img/extra_slides_gyn/Slide8.png")
 
 ```
 
-
 ### Pacotes Básicos e Expansões
 
 ```{r}
@@ -792,42 +797,39 @@ include_graphics("img/extra_slides_gyn/Slide1.png")
 
 ```
 
+# Perguntas
 
-Perguntas
-============================================
-
-Row {.tabset}
---------------------------
+## Row {.tabset}
 
 ### Referências
 
-- [An Introduction do Statistical Modelling - James, G. et. al.](http://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf) 
+-   [An Introduction do Statistical Modelling - James, G. et. al.](https://static1.squarespace.com/static/5ff2adbe3fe4fe33db902812/t/6062a083acbfe82c7195b27d/1617076404560/ISLR%2BSeventh%2BPrinting.pdf)
 
-[The Elements of Statistical Learning - Hastie, T. et. al.](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) 
+[The Elements of Statistical Learning - Hastie, T. et. al.](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf)
 
-- [Documentação Tidymodels](https://www.tidymodels.org)
+-   [Documentação Tidymodels](https://www.tidymodels.org)
 
-- [Julia Silge's Blog - LASSO regression](https://juliasilge.com/blog/lasso-the-office/)
+-   [Julia Silge's Blog - LASSO regression](https://juliasilge.com/blog/lasso-the-office/)
 
-- [Tidy modelling with R](https://www.tmwr.org)
+-   [Tidy modelling with R](https://www.tmwr.org)
 
-- [An introduction to the tidymodels package - Bruna Wunderwald ](http://brunaw.com/tidymodels-webinar/slides/slides.html#1)
+-   [An introduction to the tidymodels package - Bruna Wunderwald](http://brunaw.com/tidymodels-webinar/slides/slides.html#1)
 
-- [An introduction to tidymodels - Max Kuhn](https://f.hubspotusercontent00.net/hubfs/3463003/Max%20Kuhn.pdf)
+-   [An introduction to tidymodels - Max Kuhn](https://f.hubspotusercontent00.net/hubfs/3463003/Max%20Kuhn.pdf)
 
-- [Feature Engineering and Selection](https://bookdown.org/max/FES/intro-intro.html)
+-   [Feature Engineering and Selection](https://bookdown.org/max/FES/intro-intro.html)
 
-- [Full Tidymodels Workflowsets Machine Learning Tutorial | Interview w/ Julia Silge (Rstudio)](https://www.youtube.com/watch?v=l5is1lF3Gq0&t=3242s)
+-   [Full Tidymodels Workflowsets Machine Learning Tutorial \| Interview w/ Julia Silge (Rstudio)](https://www.youtube.com/watch?v=l5is1lF3Gq0&t=3242s)
 
-- [R-Ladies](https://github.com/R-Ladies-Sao-Paulo/RLadies-Brasil)
+-   [R-Ladies](https://github.com/R-Ladies-Sao-Paulo/RLadies-Brasil)
 
-- [Introdução a Tidymodels - Mendonça, T.](https://www.tiagoms.com/post/tidymodels/)
+-   [Introdução a Tidymodels - Mendonça, T.](https://www.tiagoms.com/post/tidymodels/)
 
-- [Machine Learning com tidymodels: Esquenta](http://brunaw.com/tidymodels-webinar/esquenta/slides.html#1)
+-   [Machine Learning com tidymodels: Esquenta](http://brunaw.com/tidymodels-webinar/esquenta/slides.html#1)
 
-- [Generalizing Gain Penalization for Feature Selection in Tree-Based Models - Bruna Wunderwald](https://brunaw.com/blog/posts/2021-03-30-rf-penalization/)
+-   [Generalizing Gain Penalization for Feature Selection in Tree-Based Models - Bruna Wunderwald](https://brunaw.com/blog/posts/2021-03-30-rf-penalization/)
 
-- [Generalizing Gain Penalization for Feature Selection in Tree-Based Models - Bruna Wunderwald](ieeexplore.ieee.org/document/9229097)
+-   [Generalizing Gain Penalization for Feature Selection in Tree-Based Models - Bruna Wunderwald](ieeexplore.ieee.org/document/9229097)
 
 ### Contato
 
@@ -836,5 +838,3 @@ Row {.tabset}
 include_graphics("img/extra_slides_gyn/Slide9.png")
 
 ```
-
-
