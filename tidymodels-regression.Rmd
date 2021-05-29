@@ -10,7 +10,7 @@ output:
 runtime: shiny
 ---
 
-```{=html}
+```{html}
 <style type="text/css">
 
 body, td {
@@ -56,8 +56,7 @@ theme_set(theme_minimal())
 theme_update(text = element_text(family = "Avenir Next", 
                                  size = 12,
                                  color = "#5F504C"),
-             plot.title = element_text(face = "bold", Simba12/08
-                                       
+             plot.title = element_text(face = "bold",
                                        size = 16,
                                        color = "#B38C45"
                                        ),
