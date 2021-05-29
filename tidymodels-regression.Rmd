@@ -485,6 +485,26 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 ```
 
 
+  - **Simples**  (y ~ x)
+  
+  $$
+  Y \sim X\beta_0 + \epsilon
+  $$
+  
+  - **Múltipla** (y ~ .)
+  $$
+  Y \sim X\beta_0 + X\beta_1 + ... + X\beta_n + \epsilon
+  $$
+
+- **Splines**
+- **KNN**
+- **Redes Neurais**
+
+- **Principais métricas de performance**:
+  - $R^2$
+  - MSE (Erro Quadrado Médio)
+  - MAE (Erro Médio Absoltuo)
+
 ### Classificação
 
 - **Regressão Logística**
@@ -496,7 +516,7 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ```
 
-- **Ridge Regression**
+- **Ridge Regression (Regularização L2)**
 
 ```{r echo=TRUE}
 
@@ -507,7 +527,8 @@ include_graphics("img/extra_slides_gyn/Slide6.png")
 
 ```
 
-- **LASSO**
+- **LASSO (Regularização L1)**
+  - Seleção de variáveis
 
 ```{r echo=TRUE}
 
@@ -780,9 +801,13 @@ Row {.tabset}
 
 ### Referências
 
+- [An Introduction do Statistical Modelling - James, G. et. al.](http://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf) 
+
+[The Elements of Statistical Learning - Hastie, T. et. al.](https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf) 
+
 - [Documentação Tidymodels](https://www.tidymodels.org)
 
-- [Julia Silge's Blog](https://juliasilge.com/blog/netflix-titles/)
+- [Julia Silge's Blog - LASSO regression](https://juliasilge.com/blog/lasso-the-office/)
 
 - [Tidy modelling with R](https://www.tmwr.org)
 
@@ -796,11 +821,13 @@ Row {.tabset}
 
 - [R-Ladies](https://github.com/R-Ladies-Sao-Paulo/RLadies-Brasil)
 
+- [Introdução a Tidymodels - Mendonça, T.](https://www.tiagoms.com/post/tidymodels/)
+
+- [Machine Learning com tidymodels: Esquenta](http://brunaw.com/tidymodels-webinar/esquenta/slides.html#1)
+
 - [Generalizing Gain Penalization for Feature Selection in Tree-Based Models - Bruna Wunderwald](https://brunaw.com/blog/posts/2021-03-30-rf-penalization/)
 
 - [Generalizing Gain Penalization for Feature Selection in Tree-Based Models - Bruna Wunderwald](ieeexplore.ieee.org/document/9229097)
-
-- [Machine Learning com tidymodels: Esquenta](http://brunaw.com/tidymodels-webinar/esquenta/slides.html#1)
 
 ### Contato
 
